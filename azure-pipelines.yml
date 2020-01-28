@@ -8,12 +8,12 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-late'
+  vmImage: 'windows'
 
 variables:
   buildConfiguration: 'Release'
   appname: 'SpaceGame Web'
-  installDir: ''
+  installDir: c://
 
 steps:
 # acquires a specific version of .NET Core (3.1)
