@@ -45,15 +45,3 @@ steps:
 - script: pip install subprocess.run
   displayName: 'Install subprocess libraries'
   
-
-#- task: PythonScript@0
-#  inputs:
-#    scriptSource: filePath
-#    scriptPath: ''
-    #scriptSource: 'filePath' # Options: filePath, inline
-    #scriptPath: # Required when scriptSource == filePath
-    #script: # Required when scriptSource == inline
-    #arguments: # Optional
-    #pythonInterpreter: # Optional
-    #workingDirectory: # Optional
-    #failOnStderr: false # Optional
