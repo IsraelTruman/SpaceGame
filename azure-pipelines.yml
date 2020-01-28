@@ -45,3 +45,8 @@ steps:
 - script: pip install subprocess.run
   displayName: 'Install subprocess libraries'
   
+- task: PythonScript@0
+  displayName: 'Test Space Game Web'
+  inputs:
+    scriptSource: 'filePath' # Options: filePath, inline
+    scriptPath: main.py
