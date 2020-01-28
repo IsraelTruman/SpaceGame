@@ -1,19 +1,59 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+# specifies that push to master branch cause a continuous integration build to run
 trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-late'
+
+variables:
+  buildConfiguration: 'Release'
+  appname: 'SpaceGame Web'
+  installDir: ''
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+# acquires a specific version of .NET Core (3.1)
+- task: UseDotNet@2
+  displayName: 'Use .NET Core 3.1 sdk'
+  inputs:
+    packageType: sdk
+    version: '3.1.x'
+    installationPath: $(installDir)/dotnet
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+
+- script: dotnet build --configuration $(buildConfiguration) --no-build --project Tailspin.SpaceGame.
+  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+
+- script: pip install json  .
+  displayName: 'Install json libraries'
+
+- script: pip install xlwt
+  displayName: 'Install xlwt libraries'
+  
+- script: pip install requests
+  displayName: 'Install requests libraries'
+  
+- script: pip install selenium
+  displayName: 'Install selenium libraries'
+  
+- script: pip install subprocess.run
+  displayName: 'Install subprocess libraries'
+  
+
+#- task: PythonScript@0
+#  inputs:
+#    scriptSource: filePath
+#    scriptPath: ''
+    #scriptSource: 'filePath' # Options: filePath, inline
+    #scriptPath: # Required when scriptSource == filePath
+    #script: # Required when scriptSource == inline
+    #arguments: # Optional
+    #pythonInterpreter: # Optional
+    #workingDirectory: # Optional
+    #failOnStderr: false # Optional
