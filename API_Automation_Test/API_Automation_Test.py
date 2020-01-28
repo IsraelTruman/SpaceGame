@@ -11,19 +11,22 @@ now = datetime.datetime.now()
 # NOTE: verify=False to avoid getting the SSL Certificate Verify Failed error.
 def get_all_players(url_all_players):
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Trying to retrieve all players...")
+    players_data = ""
     try:
         players = requests.get(url=url_all_players, verify=False)
         if players.status_code in [200, 201]:
             players_data = players.json()
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Players retrieved successfully.")
-            return players_data
+            return "Pass", players_data
         else:
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " couldn't retrieve players.")
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " An Http Error " + str(players.status_code) + " occurred.")
+            return "Fail", players_data
     except requests.exceptions.RequestException as err:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " couldn't retrieve players.")
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + "Request got the following error: ")
         print(str(err))
+        return "Fail", players_data
 
 
 # The get_player_by_id function get the API URL to get profile and profile id and use them to create the API to get
@@ -38,13 +41,15 @@ def get_player_by_id(url_player_by_id, id_player=1):
             player_data = player.json()
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Player profile with id " + str(
                 id_player) + " retrieved successfully.")
-            return player_data["userName"], player_data["score"]["highScore"]
+            return "Pass", player_data["userName"], player_data["score"]["highScore"]
         else:
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " couldn't retrieve player with ID " + str(id_player) + ".")
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " An Http Error " + str(player.status_code) + " occurred.")
+            return "Fail", "", ""
     except requests.exceptions.RequestException as error:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't retrieve player with id " + str(id_player))
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Request got the following error: " + str(error))
+        return "Fail", "", ""
 
 
 # The write_player_to_file get player name and his high score and write them to Champion Score.txt file.
@@ -64,9 +69,10 @@ def write_champ_player_to_file(list_champ):
             file_location = 'C:\\Users\\israel_tr\\PycharmProjects\\Space Game\\Champion Score.txt'
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " 'Champion Score.txt' file created successfully.")
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " File location: " + file_location)
-            return file_location
+            return "Pass", file_location
     except EnvironmentError:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't create 'Champion Score.txt' file.")
+        return "Fail", ""
 
 
 # The add_player_profile get json file, open it in read mode and retrieve the list of players profile.
@@ -87,12 +93,15 @@ def add_player_to_profile_file(target_json_file, profile_data):
                 else:
                     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Player profile already exist in target file: ")
                     print(target_json_file)
+                    return "Pass"
             except ValueError:
                 print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't read profile file:")
                 print(target_json_file)
+                return "Fail"
     except EnvironmentError:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't read profile file:")
         print(target_json_file)
+        return "Fail"
     if flag_add:
         try:
             with open(target_json_file, 'w', encoding='utf-8') as fw:
@@ -100,19 +109,20 @@ def add_player_to_profile_file(target_json_file, profile_data):
                     json.dump(list_of_players, fw, ensure_ascii=False, indent=4)
                     print(str(now.strftime(
                         "%Y-%m-%d %H:%M:%S")) + " Player profile was added successfully to target file: " + target_json_file)
+                    return "Pass"
                 except TypeError:
                     print(str(now.strftime(
                         "%Y-%m-%d %H:%M:%S")) + " Couldn't add target profile to target file: " + target_json_file)
+                    return "Fail"
         except EnvironmentError:
             print(str(
                 now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't add target profile to target file: " + target_json_file)
+            return "Fail"
 
 
 # The merge_sort function get the data of all players and sort them according to the highScore value in ascending mode.
-# The function set a minimum parameter the first value of the list and compare all hte other list objects.
-# if it find other object to be smaller the minimum parameter will be replaced with it and keep on checking the list.
-# When the minimum value found it removed from the list. and appended to new list.
-# The function will keep on running until the data list length is 1.
+# The function device the list to 2 smaller list and keep on doing so recursively until the list length is less than 1.
+# that it start sorting the smallest lists and return them until the main function
 def merge_sort(data):
     if len(data) > 1:
         mid = len(data) // 2
@@ -152,9 +162,10 @@ def get_champs_sorted_list(data_of_players):
             else:
                 break
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Players names and scores collected successfully.")
-        return list_of_champs
+        return "Pass", list_of_champs
     else:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't collect players names and scores.")
+        return "Pass", ""
 
 
 def get_high_score_from_champ_file(file):
@@ -167,39 +178,40 @@ def get_high_score_from_champ_file(file):
                 print(str(now.strftime(
                     "%Y-%m-%d %H:%M:%S")) + " Champion/s highest score/s found successfully in champion file.")
                 print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " File location: " + file)
+                return "Pass", player_score, player_name
             else:
                 print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Champion/s highest score/s in champion file.")
-                player_score = []
-                player_name = []
-            return player_score, player_name
+                return "Fail", [], []
     except ValueError:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't read profile file:")
         print(file)
+        return "Fail", [], []
 
 
 def compare_scores(list_of_champs_score, list_of_champs_name, player_score, player_name):
     plural = ("\'s" if len(list_of_champs_score) > 1 else "")
     champ_name = "' and '".join(list_of_champs_name)
-    if int(list_of_champs_score[0]) > player_score:
+    if int(list_of_champs_score[0]) > int(player_score):
         print(str(now.strftime(
             "%Y-%m-%d %H:%M:%S")) + " Champion" + plural + "'" + champ_name + "' score" + plural + " '" + str(
             list_of_champs_score[0]) +
               "' greater than player '" + player_name + "' score " + str(player_score))
-    elif int(list_of_champs_score[0]) < player_score:
+    elif int(list_of_champs_score[0]) < int(player_score):
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Player '" + player_name + "' score " + str(
             player_score) + " greater than champion" + plural + "'"
               + champ_name + "' score" + plural + " '" + str(list_of_champs_score[0]) + "'")
     else:
         print(str(now.strftime(
-            "%Y-%m-%d %H:%M:%S")) + " Champion" + plural + "'" + champ_name + "' score" + plural + " '" + str(
+            "%Y-%m-%d %H:%M:%S")) + " Champion" + plural + "'" + champ_name + "' score is '" + str(
             list_of_champs_score[0]) +
               "' equal to player '" + player_name + "' score '" + str(player_score) + "'")
+    return "Pass"
 
 
 def create_excel(url_request_all_players):
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Creating excel file with all players and total score...")
-    player_db = get_all_players(url_request_all_players)
-    if player_db:
+    status_of_test, player_db = get_all_players(url_request_all_players)
+    if status_of_test == "Pass":
         style = xlwt.XFStyle()
         # cell color
         pattern = xlwt.Pattern()
@@ -212,16 +224,6 @@ def create_excel(url_request_all_players):
         font.colour_index = 1  # white
         style.font = font
         # borders
-        # borders = xlwt.Borders()
-        # borders.left = 1
-        # borders.left_colour = xlwt.Style.colour_map['light_blue']
-        # borders.right = 1
-        # borders.right_colour = xlwt.Style.colour_map['light_blue']
-        # borders.top = 1
-        # borders.top_colour = xlwt.Style.colour_map['light_blue']
-        # borders.bottom = 1
-        # borders.bottom_colour = xlwt.Style.colour_map['light_blue']
-        # style.borders = borders
         style_border = xlwt.XFStyle()
         borders = xlwt.Borders()
         borders.left = 1
@@ -253,5 +255,8 @@ def create_excel(url_request_all_players):
         wb.save('C:\\Users\\israel_tr\\PycharmProjects\\Space Game\\Total Score.xls')
         print(str(
             now.strftime("%Y-%m-%d %H:%M:%S")) + " Excel file with all players and total score created successfully.")
+        return "Pass"
     else:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't create excel file with all players and total score.")
+        return "Fail"
+
