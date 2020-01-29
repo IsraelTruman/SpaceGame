@@ -114,7 +114,8 @@ def change_page(page_num):
         return "Fail"
 
 
-# The check_player_score locate a player in the players table and get the score, Galaxy and Mode parameters.
+# The check_player_score get a player name as string and locate it at table,
+# get the score, Galaxy and Mode parameters and print them to console.
 def check_player_score(player):
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Trying to get " + player + " score ...")
     try:
@@ -136,7 +137,9 @@ def check_player_score(player):
         return "Fail"
 
 
-#
+# The check_player_achievements get a player name as string and locate it at table, and click on the name link.
+# After the player pop-up window opened it check hat the player name appeared and get the list of achievements.
+# Afterword it prints them in console and close the pop-up window.
 def check_player_achievements(player):
     try:
         player_in_list = driver.find_element_by_link_text(player)
@@ -186,6 +189,14 @@ def check_player_achievements(player):
         return "Fail"
 
 
+# The change_table get a table name and a value in table as strings.
+# Afterward it compared the table name with "galaxy" or "mode" to verify which table to change.
+# Any other table name will print error.
+# Later it checks if value exist in the table:
+# If no, it return an error message that the value not exist in the table.
+# If yes, it checks if the value is a link.
+# If yes, click on it and print message to console.
+# If not, print message to console that it already selected.
 def change_table(table_name, table_value):
     time.sleep(3)
     if table_name.lower() == "galaxy":
@@ -228,6 +239,8 @@ def change_table(table_name, table_value):
         return "Fail"
 
 
+# The get_total_score function get an integer to compare with the total score of all players table.
+# Later it prints the evaluation result to console.
 def get_total_score(compare_score):
     all_players_scores = driver.find_elements(By.XPATH, ".//div[@class='col-sm-2 score-data']")
     if len(all_players_scores) >= 1:  # In case we couldn't get the list from the table we still get an empty list.
