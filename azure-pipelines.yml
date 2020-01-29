@@ -38,8 +38,8 @@ steps:
 # - script: dotnet build --configuration $(buildConfiguration) --no-build --project Tailspin.SpaceGame.
 #   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
-- script: python -m pip install --upgrade pip
-  displayName: 'Install json libraries'
+- script: python -m pip install --upgrade pip json xlwt
+  displayName: 'Upgrade pip'
 
 - script: python -m pip install json
   displayName: 'Install json libraries'
