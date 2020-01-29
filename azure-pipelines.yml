@@ -24,14 +24,26 @@ steps:
     version: '3.1.x'
     installationPath: $(installDir)/dotnet
 
-# - script: unzip
-#   displayName: 'unzip dotnet build for $(appname) $(buildConfiguration)'
+- task: PythonScript@0
+  displayName: 'Test Space Game Web'
+  inputs:
+    scriptSource: 'filePath' # Options: filePath, inline
+    scriptPath: main.py
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+    architecture: 'x64'
 
 # - script: dotnet build --configuration $(buildConfiguration)
 #   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
+
 # - script: dotnet build --configuration $(buildConfiguration) --no-build --project Tailspin.SpaceGame.
 #   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+
+
 
 - script: pip install json  .
   displayName: 'Install json libraries'
@@ -48,8 +60,3 @@ steps:
 - script: pip install subprocess.run
   displayName: 'Install subprocess libraries'
   
-- task: PythonScript@0
-  displayName: 'Test Space Game Web'
-  inputs:
-    scriptSource: 'filePath' # Options: filePath, inline
-    scriptPath: main.py
