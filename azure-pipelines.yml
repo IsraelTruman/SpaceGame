@@ -16,6 +16,18 @@ variables:
   installDir: c://
 
 steps:
+
+- pwsh: |
+   echo "##vso[task.prependpath]$env:CHROMEWEBDRIVER"
+  displayName: Adds ChromeWebDriver for Selenium to PATH 
+
+- powershell: |
+   Write-Host "Robot Framework tests"
+   robot -x 'outputxunit.xml' '$(Build.SourcesDirectory)\tests\.'
+  failOnStderr: true
+  displayName: 'Run Robot Framework Tests'
+  continueOnError: false
+
 # acquires a specific version of .NET Core (3.1)
 - task: UseDotNet@2
   displayName: 'Use .NET Core 3.1 sdk'
@@ -43,21 +55,6 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-# - script: python -m pip install json
-#   displayName: 'Install json libraries'
-
-# - script: python -m pip install xlwt
-#   displayName: 'Install xlwt libraries'
-  
-# - script: python -m pip install requests
-#   displayName: 'Install requests libraries'
-  
-# - script: python -m pip install selenium
-#   displayName: 'Install selenium libraries'
-  
-# - script: python -m pip install subprocess
-#   displayName: 'Install subprocess libraries'
-  
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
   inputs:
