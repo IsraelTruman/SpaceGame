@@ -100,9 +100,20 @@ def change_page(page_num):
                 str(now.strftime("%Y-%m-%d %H:%M:%S")) + " This page got error " + str(response.status_code) + ".")
             return "Fail"
         else:
-            page.click()
-            print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Changing page to page " + str(page_num) + ".")
-            return "Pass"
+            try:
+                page.click()
+                print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Changing page to page " + str(page_num) + ".")
+                return "Pass"
+            except NoSuchElementException:
+                print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " The requested 'page " + str(
+                    page_num) + "' element not found.")
+                return "Fail"
+            except ElementClickInterceptedException:
+                print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't click on 'page " + str(page_num) + "' link.")
+                return "Fail"
+            except ElementNotVisibleException:
+                print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " 'Page " + str(page_num) + "' link is not visible.")
+                return "Fail"
     except NoSuchElementException:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " The requested 'page " + str(page_num) + "' element not found.")
         return "Fail"
