@@ -150,6 +150,10 @@ def merge_sort(data):
             k += 1
 
 
+# The get_champs_sorted_list function get the data of players as list.
+# Afterward it extract the players name and score only to a new list.
+# After it calls to the merge_sort function ans send her the new list and get a same list but sored in ascending mode.
+# Later it takes the player/s with the highest score.
 def get_champs_sorted_list(data_of_players):
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Collecting players names and scores for all players profile...")
     if type(data_of_players) == list and len(data_of_players) != 0:
@@ -168,6 +172,8 @@ def get_champs_sorted_list(data_of_players):
         return "Pass", ""
 
 
+# The get_high_score_from_champ_file function get a text file with the highest score player/s.
+# Using regex it retrieve the player/s score and name and return them.
 def get_high_score_from_champ_file(file):
     try:
         with open(file, 'r') as f:
@@ -180,7 +186,7 @@ def get_high_score_from_champ_file(file):
                 print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " File location: " + file)
                 return "Pass", player_score, player_name
             else:
-                print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Champion/s highest score/s in champion file.")
+                print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't read champion/s highest score/s in champion file.")
                 return "Fail", [], []
     except ValueError:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't read profile file:")
@@ -188,6 +194,9 @@ def get_high_score_from_champ_file(file):
         return "Fail", [], []
 
 
+# The compare_scores function get list of champions and list of scores (retrieved from champion.txt file
+# in get_high_score_from_champ_file function) and player name and score that added using REST in
+# add_player_to_profile_file function, it compares the scores and print the compression to console.
 def compare_scores(list_of_champs_score, list_of_champs_name, player_score, player_name):
     plural = ("\'s" if len(list_of_champs_score) > 1 else "")
     champ_name = "' and '".join(list_of_champs_name)
@@ -208,6 +217,8 @@ def compare_scores(list_of_champs_score, list_of_champs_name, player_score, play
     return "Pass"
 
 
+# The create_excel send new API request for all players data (in case of more players been added during the automation)
+# and save the data in to .xls file. At the bottom of the table it summarize the total score.
 def create_excel(url_request_all_players):
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Creating excel file with all players and total score...")
     status_of_test, player_db = get_all_players(url_request_all_players)
