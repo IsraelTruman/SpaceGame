@@ -24,11 +24,14 @@ steps:
     version: '3.1.x'
     installationPath: $(installDir)/dotnet
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+# - script: unzip
+#   displayName: 'unzip dotnet build for $(appname) $(buildConfiguration)'
 
-- script: dotnet build --configuration $(buildConfiguration) --no-build --project Tailspin.SpaceGame.
-  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+# - script: dotnet build --configuration $(buildConfiguration)
+#   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+
+# - script: dotnet build --configuration $(buildConfiguration) --no-build --project Tailspin.SpaceGame.
+#   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
 - script: pip install json  .
   displayName: 'Install json libraries'
