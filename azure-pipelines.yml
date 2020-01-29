@@ -40,19 +40,19 @@ steps:
 
 
 
-- script: pip install json  .
+- script: python -m pip install json  .
   displayName: 'Install json libraries'
 
-- script: pip install xlwt
+- script: python -m pip install xlwt
   displayName: 'Install xlwt libraries'
   
-- script: pip install requests
+- script: python -m pip install requests
   displayName: 'Install requests libraries'
   
-- script: pip install selenium
+- script: python -m pip install selenium
   displayName: 'Install selenium libraries'
   
-- script: pip install subprocess.run
+- script: python -m pip install subprocess
   displayName: 'Install subprocess libraries'
   
 - task: PythonScript@0
