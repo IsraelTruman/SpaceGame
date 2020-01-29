@@ -1,2 +1,2 @@
-install json
-install xlwt
+pip install json
+pip install xlwt
