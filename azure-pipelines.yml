@@ -43,20 +43,20 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: python -m pip install json
-  displayName: 'Install json libraries'
+# - script: python -m pip install json
+#   displayName: 'Install json libraries'
 
-- script: python -m pip install xlwt
-  displayName: 'Install xlwt libraries'
+# - script: python -m pip install xlwt
+#   displayName: 'Install xlwt libraries'
   
-- script: python -m pip install requests
-  displayName: 'Install requests libraries'
+# - script: python -m pip install requests
+#   displayName: 'Install requests libraries'
   
-- script: python -m pip install selenium
-  displayName: 'Install selenium libraries'
+# - script: python -m pip install selenium
+#   displayName: 'Install selenium libraries'
   
-- script: python -m pip install subprocess
-  displayName: 'Install subprocess libraries'
+# - script: python -m pip install subprocess
+#   displayName: 'Install subprocess libraries'
   
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
