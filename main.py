@@ -92,7 +92,7 @@ def main():
     tests_status_dict[test_status] += 1
     time.sleep(5)  # Wait 5 sec until app is up.
     if test_status == "Pass":  # If application is up run automation.
-        tests_status_dict = ui_automation(tests_status_dict)  # Run all UI automation tests.
+#         tests_status_dict = ui_automation(tests_status_dict)  # Run all UI automation tests.
         tests_status_dict = api_automation(tests_status_dict)  # Run al API automation tests.
     test_status = RUN.run_application("Off")  # Shutdown Game Space application.
     tests_status_dict[test_status] += 1
