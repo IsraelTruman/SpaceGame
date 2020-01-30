@@ -43,9 +43,19 @@ steps:
     version: '3.1.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- script: dotnet build /Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj --configuration $(buildConfiguration)
-  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release' # Update this to match your need
 
+# - task: DotNetCoreCLI@2
+#   displayName: run
+#   inputs:
+#     command: build
+#     projects: '**/*.csproj'
+#     arguments: '--configuration Release' # Update this to match your need
 
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
