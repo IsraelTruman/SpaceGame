@@ -12,18 +12,10 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  appname: 'SpaceGame Web'
+  appname: 'SpaceGameWeb'
   installDir: c://
 
 steps:
-
-# acquires a specific version of .NET Core (3.1)
-- task: UseDotNet@2
-  displayName: 'Use .NET Core 3.1 sdk'
-  inputs:
-    packageType: sdk
-    version: '3.1.x'
-    installationPath: $(installDir)/dotnet
 
 
 - task: UsePythonVersion@0
@@ -50,18 +42,17 @@ steps:
     destinationFolder: '$(installDir)'
     cleanDestinationFolder: False
 
-
-- task: DotNetCoreCLI@2
+# acquires a specific version of .NET Core (3.1)
+- task: UseDotNet@2
+  displayName: 'Use .NET Core 3.1 sdk'
   inputs:
-    command: 'build'
-    arguments: '--configure Release'
+    packageType: sdk
+    version: '3.1.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
-
-# - script: |
-#     cd C:\mslearn-tailspin-spacegame-web-master
-#     dotnet build --configuration $(buildConfiguration)
-#   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
