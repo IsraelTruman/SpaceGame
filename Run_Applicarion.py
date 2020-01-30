@@ -13,7 +13,7 @@ def run_application(active):
     if active.lower() == "on":
         try:
             subprocess.Popen((
-                r"cd C:\\mslearn-tailspin-spacegame-web-master && dotnet run --configuration Release --no-build --project Tailspin.SpaceGame.Web"),
+                r"cd d:\\a\\1\\s\\mslearn-tailspin-spacegame-web-master && dotnet run --configuration Release --no-build --project Tailspin.SpaceGame.Web"),
                 shell=True)
             status = "Pass"
         except subprocess.CalledProcessError:
