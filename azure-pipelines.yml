@@ -55,8 +55,8 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
 
-# - task: PythonScript@0
-#   displayName: 'Test Space Game Web'
-#   inputs:
-#     scriptSource: 'filePath'
-#     scriptPath: main.py
+- task: PythonScript@0
+  displayName: 'Test Space Game Web'
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: main.py
