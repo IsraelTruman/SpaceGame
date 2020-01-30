@@ -54,7 +54,7 @@ steps:
   inputs:
     command: build
     projects: '**/*.csproj'
-    arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
+    arguments: '--configuration Release --project Tailspin.SpaceGame.Web' # Update this to match your need
 
 # - task: PythonScript@0
 #   displayName: 'Test Space Game Web'
