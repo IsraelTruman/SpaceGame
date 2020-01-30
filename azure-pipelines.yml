@@ -23,7 +23,6 @@ variables:
 
 steps:
 
-
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.x'
@@ -35,13 +34,6 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-# - task: PythonScript@0
-#   inputs:
-#     scriptSource: inline
-#     script: |
-#       import sys
-#       print ('Executing script file is:', str(sys.argv[0]))
-#       print ('The arguments are:', str(sys.argv))
 
 # - pwsh: |
 #    echo "##vso[task.prependpath]$env:CHROMEWEBDRIVER"
@@ -49,6 +41,13 @@ steps:
 
 # - script: webdrivermanager chrome --linkpath AUTO
 #   displayName: Adds ChromeWebDriver for Selenium to PATH 
+
+- powershell: |
+   (Get-Item "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe").VersionInfo 
+  displayName: 'We want to know the Chrome version installed on this darned machine'
+
+- script: webdrivermanager chrome:$(ChromeVersion) --linkpath AUTO
+  displayName: 'Manage Chrome webdriver version'
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core 3.1 sdk'
@@ -64,15 +63,15 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration Release'
 
-# - task: DotNetCoreCLI@2
-#   displayName: Run DotNet Application
-#   inputs:
-#     command: run
-#     projects: '**/*.csproj'
-#     arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
-
-- task: PythonScript@0
-  displayName: 'Test Space Game Web'
+- task: DotNetCoreCLI@2
+  displayName: Run DotNet Application
   inputs:
-    scriptSource: 'filePath'
-    scriptPath: main.py
+    command: run
+    projects: '**/*.csproj'
+    arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
+
+# - task: PythonScript@0
+#   displayName: 'Test Space Game Web'
+#   inputs:
+#     scriptSource: 'filePath'
+#     scriptPath: main.py
