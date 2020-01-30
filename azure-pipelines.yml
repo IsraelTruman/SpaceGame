@@ -49,7 +49,7 @@ steps:
   inputs:
     archiveFilePatterns: '*.zip'
     destinationFolder: 'c://'
-    cleanDestinationFolder: true
+    cleanDestinationFolder: False
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
