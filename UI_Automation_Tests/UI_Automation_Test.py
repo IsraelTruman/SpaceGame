@@ -6,11 +6,11 @@ from selenium.common.exceptions import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
+# driver = webdriver.Chrome(ChromeDriverManager().install())
 now = datetime.datetime.now()
-# driver = webdriver.Chrome('c:\\drivers\\chromedriver.exe')  # Set the location of the chromedriver.exe file.
+driver = webdriver.Chrome('c:\\drivers\\chromedriver.exe')  # Set the location of the chromedriver.exe file.
 
 
 # The open_game_window function start the web chrome browser with the url and port sent as parameters.
