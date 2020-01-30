@@ -7,6 +7,12 @@
 trigger:
 - master
 
+strategy:
+  matrix:
+    win-chrome:
+      imageName: windows-2019
+      browser: chrome
+
 pool:
   vmImage: 'windows-latest'
 
@@ -50,8 +56,8 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration Release' # Update this to match your need
 
-- task: PythonScript@0
-  displayName: 'Test Space Game Web'
-  inputs:
-    scriptSource: 'filePath'
-    scriptPath: main.py
+# - task: PythonScript@0
+#   displayName: 'Test Space Game Web'
+#   inputs:
+#     scriptSource: 'filePath'
+#     scriptPath: main.py
