@@ -44,7 +44,8 @@ steps:
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - script: |
-    cd $(installDir)\mslearn-tailspin-spacegame-web-master\Tailspin.SpaceGame.Web
+    cd \
+    cd d:\a\1\s\mslearn-tailspin-spacegame-web-master\Tailspin.SpaceGame.Web
     dotnet build --configuration Release
 
 # - task: DotNetCoreCLI@2
