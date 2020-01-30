@@ -52,9 +52,9 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Run DotNet Application
   inputs:
-    command: build
+    command: run
     projects: '**/*.csproj'
-    arguments: '--configuration Release --project Tailspin.SpaceGame.Web' # Update this to match your need
+    arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
 
 # - task: PythonScript@0
 #   displayName: 'Test Space Game Web'
