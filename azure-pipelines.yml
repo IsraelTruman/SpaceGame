@@ -44,8 +44,18 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
+
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '*.zip'
+    destinationFolder: 'c://'
+    cleanDestinationFolder: true
+
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
   inputs:
-    scriptSource: 'filePath' # Options: filePath, inline
+    scriptSource: 'filePath
     scriptPath: main.py
