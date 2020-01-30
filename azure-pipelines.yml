@@ -32,7 +32,7 @@ steps:
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '*.zip'
-    destinationFolder: '$(installDir)'
+    destinationFolder: './mslearn-tailspin-spacegame-web-master'
     cleanDestinationFolder: False
 
 # acquires a specific version of .NET Core (3.1)
@@ -44,8 +44,7 @@ steps:
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - script: |
-    cd \
-    cd d:\a\1\s\mslearn-tailspin-spacegame-web-master\Tailspin.SpaceGame.Web
+    ./mslearn-tailspin-spacegame-web-master/Tailspin.SpaceGame.Web
     dotnet build --configuration Release
 
 # - task: DotNetCoreCLI@2
