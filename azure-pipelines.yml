@@ -7,11 +7,11 @@
 trigger:
 - master
 
-# strategy:
-#   matrix:
-#     win-chrome:
-#       imageName: windows-2019
-#       browser: chrome
+strategy:
+  matrix:
+    win-chrome:
+      imageName: windows-2019
+      browser: chrome
 
 pool:
   vmImage: 'windows-latest'
