@@ -44,17 +44,24 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '*.zip'
-    destinationFolder: 'c://'
+    destinationFolder: '$(installDir)'
     cleanDestinationFolder: False
 
-- script: |
-    cd C:\mslearn-tailspin-spacegame-web-master
-    dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build for $(appname) $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: '--configure Release'
+
+
+
+# - script: |
+#     cd C:\mslearn-tailspin-spacegame-web-master
+#     dotnet build --configuration $(buildConfiguration)
+#   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
