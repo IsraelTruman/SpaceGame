@@ -51,7 +51,9 @@ steps:
     destinationFolder: 'c://'
     cleanDestinationFolder: False
 
-- script: dotnet build --configuration $(buildConfiguration)
+- script: |
+    cd C:\mslearn-tailspin-spacegame-web-master
+    dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build for $(appname) $(buildConfiguration)'
 
 - task: PythonScript@0
