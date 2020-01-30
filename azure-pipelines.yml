@@ -57,5 +57,5 @@ steps:
 - task: PythonScript@0
   displayName: 'Test Space Game Web'
   inputs:
-    scriptSource: 'filePath
+    scriptSource: 'filePath'
     scriptPath: main.py
