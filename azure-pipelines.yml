@@ -43,10 +43,14 @@ steps:
     version: '3.1.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    arguments: '--configuration Release'
+- script: |
+    cd $(installDir)\mslearn-tailspin-spacegame-web-master
+    dotnet build --configuration Release
+
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'build'
+#     arguments: '--configuration Release'
 
 # - task: DotNetCoreCLI@2
 #   displayName: Build
