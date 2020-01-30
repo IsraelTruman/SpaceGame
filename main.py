@@ -112,7 +112,7 @@ def main():
 url_request_all_players = "https://localhost:5001/api/game/getplayers"
 url_request_player_by_id = "https://localhost:5001/api/game/getplayer?playerId="
 player_id = 21
-json_file = "C:\\mslearn-tailspin-spacegame-web-master\\Tailspin.SpaceGame.Web\\SampleData\\profiles.json"
+json_file = "d:\\a\\1\\s\\mslearn-tailspin-spacegame-web-master\\Tailspin.SpaceGame.Web\\SampleData\\profiles.json"
 new_player_profile_data = {
     "id": "21",
     "userName": "jhonsnow",
