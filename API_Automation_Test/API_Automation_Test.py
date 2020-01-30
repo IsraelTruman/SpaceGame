@@ -24,7 +24,7 @@ def get_all_players(url_all_players):
             return "Fail", players_data
     except requests.exceptions.RequestException as err:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " couldn't retrieve players.")
-        print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + "Request got the following error: ")
+        print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Request got the following error: ")
         print(str(err))
         return "Fail", players_data
 
