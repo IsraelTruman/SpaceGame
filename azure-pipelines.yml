@@ -29,11 +29,11 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- task: ExtractFiles@1
-  inputs:
-    archiveFilePatterns: '*.zip'
-    destinationFolder: './mslearn-tailspin-spacegame-web-master'
-    cleanDestinationFolder: False
+# - task: ExtractFiles@1
+#   inputs:
+#     archiveFilePatterns: '*.zip'
+#     destinationFolder: './mslearn-tailspin-spacegame-web-master'
+#     cleanDestinationFolder: False
 
 # acquires a specific version of .NET Core (3.1)
 - task: UseDotNet@2
@@ -43,21 +43,21 @@ steps:
     version: '3.1.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- script: |
-    ./mslearn-tailspin-spacegame-web-master/Tailspin.SpaceGame.Web
-    dotnet build --configuration Release
+# - script: |
+#     cd /mslearn-tailspin-spacegame-web-master/Tailspin.SpaceGame.Web
+#     dotnet build --configuration Release
 
 # - task: DotNetCoreCLI@2
 #   inputs:
 #     command: 'build'
 #     arguments: '--configuration Release'
 
-# - task: DotNetCoreCLI@2
-#   displayName: Build
-#   inputs:
-#     command: build
-#     projects: '**/*.csproj'
-#     arguments: '--configuration Release' # Update this to match your need
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release' # Update this to match your need
 
 # - task: DotNetCoreCLI@2
 #   displayName: run
