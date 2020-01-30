@@ -60,7 +60,7 @@ def get_player_by_id(url_player_by_id, id_player=1):
 def write_champ_player_to_file(list_champ):
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Writing highest score/s to 'Champion Score.txt' file...")
     try:
-        with open('C:\\Users\\israel_tr\\PycharmProjects\\Space Game\\Champion Score.txt', 'w') as champion_file:
+        with open('d:\\a\\1\\s\\Champion Score.txt', 'w') as champion_file:
             champion_file.write("-" * 68 + "\n")
             champion_file.write("Player Name" + " " * 9 + "Score" + "\n")
             for champ in list_champ:
