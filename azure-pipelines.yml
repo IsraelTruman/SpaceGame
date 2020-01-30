@@ -7,11 +7,11 @@
 trigger:
 - master
 
-# strategy:
-#   matrix:
-#     win-chrome:
-#       imageName: windows-2019
-#       browser: chrome
+strategy:
+  matrix:
+    win-chrome:
+      imageName: windows-2019
+      browser: chrome
 
 pool:
   vmImage: 'windows-latest'
@@ -49,15 +49,15 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration Release'
 
-- task: DotNetCoreCLI@2
-  displayName: Run DotNet Application
-  inputs:
-    command: run
-    projects: '**/*.csproj'
-    arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
-
-# - task: PythonScript@0
-#   displayName: 'Test Space Game Web'
+# - task: DotNetCoreCLI@2
+#   displayName: Run DotNet Application
 #   inputs:
-#     scriptSource: 'filePath'
-#     scriptPath: main.py
+#     command: run
+#     projects: '**/*.csproj'
+#     arguments: '--configuration Release --no-build --project Tailspin.SpaceGame.Web' # Update this to match your need
+
+- task: PythonScript@0
+  displayName: 'Test Space Game Web'
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: main.py
