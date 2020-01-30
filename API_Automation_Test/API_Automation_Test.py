@@ -66,7 +66,7 @@ def write_champ_player_to_file(list_champ):
             for champ in list_champ:
                 champion_file.write(champ[0] + " " * (20 - len(champ[0])) + str(champ[1]) + "\n")
             champion_file.close()
-            file_location = 'C:\\Users\\israel_tr\\PycharmProjects\\Space Game\\Champion Score.txt'
+            file_location = 'd:\\a\\1\\s\\Champion Score.txt'
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " 'Champion Score.txt' file created successfully.")
             print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " File location: " + file_location)
             return "Pass", file_location
@@ -263,7 +263,7 @@ def create_excel(url_request_all_players):
             all_player_sheet.write(row, 3, int(player_db[row - 1]["score"]["highScore"]), style=style_border)
         all_player_sheet.write_merge(len(player_db), len(player_db), 0, 2, "Total", style=style)
         all_player_sheet.write(len(player_db), 3, xlwt.Formula("sum(D2:D" + str(len(player_db)) + ")"), style=style)
-        wb.save('C:\\Users\\israel_tr\\PycharmProjects\\Space Game\\Total Score.xls')
+        wb.save('d:\\a\\1\\s\\Total Score.xls')
         print(str(
             now.strftime("%Y-%m-%d %H:%M:%S")) + " Excel file with all players and total score created successfully.")
         return "Pass"
