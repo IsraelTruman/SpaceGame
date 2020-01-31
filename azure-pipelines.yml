@@ -48,13 +48,6 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration Release'
 
-- pwsh: |
-   echo "##vso[task.prependpath]$env:CHROMEWEBDRIVER"
-  displayName: Adds ChromeWebDriver for Selenium to PATH 
-
-- script: webdrivermanager chrome:$(ChromeVersion) --linkpath AUTO
-  displayName: 'Manage Chrome webdriver version'
-
 # - task: DotNetCoreCLI@2
 #   displayName: Run DotNet Application
 #   inputs:
