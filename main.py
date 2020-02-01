@@ -1,4 +1,4 @@
-# from UI_Automation_Tests import UI_Automation_Test as UI
+from UI_Automation_Tests import UI_Automation_Test as UI
 from API_Automation_Test import API_Automation_Test as API
 import Run_Applicarion as RUN
 import time
