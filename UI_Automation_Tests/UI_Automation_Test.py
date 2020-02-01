@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 # driver = webdriver.Chrome(ChromeDriverManager().install())
 now = datetime.datetime.now()
-driver = webdriver.Chrome('c:\\drivers\\chromedriver.exe')  # Set the location of the chromedriver.exe file.
+driver = webdriver.Chrome('d:\\a\\1\\\s\\\chromedriver.exe')  # Set the location of the chromedriver.exe file.
 
 
 # The open_game_window function start the web chrome browser with the url and port sent as parameters.
