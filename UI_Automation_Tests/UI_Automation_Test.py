@@ -6,9 +6,7 @@ from selenium.common.exceptions import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-# from webdriver_manager.chrome import ChromeDriverManager
 
-# driver = webdriver.Chrome(ChromeDriverManager().install())
 now = datetime.datetime.now()
 driver = webdriver.Chrome('d:\\a\\1\\\s\\\chromedriver.exe')  # Set the location of the chromedriver.exe file.
 
