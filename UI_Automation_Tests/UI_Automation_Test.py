@@ -50,9 +50,9 @@ def download_game_message():
         download_button = driver.find_element_by_link_text("Download game")
         download_button.click()
         text_message = driver.find_element(By.XPATH, "//*[@id='pretend-modal']/div/div/div[2]").get_attribute(
-            'textContent')
+            'textContent').strip().replace("\n", "")
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Download Game message is:")
-        print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " \"" + text_message.strip().replace("\n", "") + "\".")
+        print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " \"" + text_message + "\".")
     except TimeoutException:
         print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Couldn't find 'Download Game' button element.")
         driver.quit()
