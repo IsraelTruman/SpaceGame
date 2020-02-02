@@ -36,7 +36,7 @@ def close_game_window():
     print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Trying to close browser window...")
     time.sleep(5)
     driver.quit()
-    print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " browser window closed successfully")
+    print(str(now.strftime("%Y-%m-%d %H:%M:%S")) + " Browser window closed successfully")
     return "Pass"
 
 
